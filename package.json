@@ -2,12 +2,12 @@
   "name": "frontend-challenge",
   "version": "1.0.0",
   "description": "Frontend Challenge",
-  "main": "src/index.js",
+  "main": "src/index.tsx",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack/webpack.dev.js",
+    "dev": "webpack-dev-server --config webpack/webpack.dev.ts",
     "utest": "jest",
     "utest-cover": "jest --coverage",
-    "build": "webpack --config webpack/webpack.prod.js"
+    "build": "webpack --config webpack/webpack.prod.ts"
   },
   "repository": {
     "type": "git",
@@ -41,6 +41,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
     "jest": "^27.4.7",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4",
     "webpack-dev-server": "^4.7.3"
   }
