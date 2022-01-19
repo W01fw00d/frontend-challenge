@@ -1,7 +1,9 @@
 import React from "react";
 
+import CreateJobPage from "./components/pages/CreateJob";
+
 function App() {
-  return <h1>Hello World - Frontend Challenge!</h1>;
+  return <CreateJobPage />;
 }
 
 export default App;
