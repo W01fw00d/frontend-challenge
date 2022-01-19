@@ -7,6 +7,10 @@ import IconTextInput from "../molecules/IconTextInput";
 
 function AddressesForm() {
   const FormBox = styled("div")({
+    display: "flex",
+    flexDirection: "column",
+
+    width: "400px",
     borderRadius: "8px",
     padding: "16px",
     margin: "32px",
@@ -28,7 +32,11 @@ function AddressesForm() {
         placeholder={"Drop off address"}
         styles={{ marginBottom: "16px" }}
       />
-      <Button />
+      <Button
+        label="Create job"
+        styles={{ width: "360px", alignSelf: "flex-end" }}
+        /* disabled */ // TODO: disable during request
+      />
     </FormBox>
   );
 }
