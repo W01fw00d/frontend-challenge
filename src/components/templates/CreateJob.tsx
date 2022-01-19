@@ -3,6 +3,7 @@ import React from "react";
 import { styled } from "@mui/system";
 
 import AddressesForm from "../organisms/AddressesForm";
+import Toaster from "../atoms/Toaster";
 
 function CreateJobTemplate() {
   const Map = styled("div")({
@@ -17,6 +18,7 @@ function CreateJobTemplate() {
   return (
     <Map>
       <AddressesForm />
+      <Toaster message="Job has been created successfully!" />
     </Map>
   );
 }
