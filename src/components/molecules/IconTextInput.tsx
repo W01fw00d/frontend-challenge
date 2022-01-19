@@ -5,15 +5,15 @@ import { styled } from "@mui/system";
 
 import TextInput from "../atoms/TextInput";
 
-function IconTextInput({ iconPath, alt }) {
+function IconTextInput({ iconPath, alt, placeholder, styles = {} }) {
   const IconImg = styled("img")({
     margin: "0 8px 0 0",
   });
 
   return (
-    <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+    <Box sx={{ display: "flex", alignItems: "flex-end", ...styles }}>
       <IconImg src={iconPath} alt={alt} />
-      <TextInput />
+      <TextInput placeholder={placeholder} />
     </Box>
   );
 }

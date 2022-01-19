@@ -1,9 +1,9 @@
 import React from "react";
 
-import AddressesForm from "../organisms/AddressesForm";
+import CreateJobTemplate from "../templates/CreateJob";
 
 function CreateJobPage() {
-  return <AddressesForm />;
+  return <CreateJobTemplate />;
 }
 
 export default CreateJobPage;

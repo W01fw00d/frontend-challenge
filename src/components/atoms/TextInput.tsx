@@ -1,7 +1,7 @@
 import React from "react";
 import { Input as MuiInput } from "@mui/material";
 
-function TextInput() {
+function TextInput({ placeholder }) {
   const styles = {
     borderRadius: "4px",
     height: "32px",
@@ -10,6 +10,8 @@ function TextInput() {
     fontSize: "15px",
     color: "#252525",
     padding: "4px 5px 5px",
+
+    width: "100%",
 
     "&::placeholder": {
       color: "#8596A6",
@@ -28,7 +30,7 @@ function TextInput() {
     },
   };
 
-  return <MuiInput id="pick-up-field" placeholder="Pick Up" sx={styles} />;
+  return <MuiInput id="pick-up-field" placeholder={placeholder} sx={styles} />;
 }
 
 export default TextInput;
