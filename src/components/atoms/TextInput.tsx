@@ -14,6 +14,18 @@ function TextInput() {
     "&::placeholder": {
       color: "#8596A6",
     },
+
+    "&.MuiInputBase-root": {
+      borderBottom: "none !important",
+    },
+
+    "&.MuiInputBase-root:before": {
+      borderBottom: "none !important",
+    },
+
+    "&.MuiInputBase-root.MuiInput-root:after": {
+      borderBottom: "none !important",
+    },
   };
 
   return <MuiInput id="pick-up-field" placeholder="Pick Up" sx={styles} />;

@@ -1,15 +1,18 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
+import { styled } from "@mui/system";
 
 import TextInput from "../atoms/TextInput";
 
-import pickUpBadgeBlank from "@mui/icons-material";
+function IconTextInput({ iconPath, alt }) {
+  const IconImg = styled("img")({
+    margin: "0 8px 0 0",
+  });
 
-function IconTextInput({ icon }) {
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-      {icon}
+      <IconImg src={iconPath} alt={alt} />
       <TextInput />
     </Box>
   );

@@ -6,11 +6,10 @@ import IconTextInput from "../molecules/IconTextInput";
 function AddressesForm() {
   return (
     <div>
+      <IconTextInput iconPath="src/assets/pickUpBadgeBlank.svg" alt="Pick Up" />
       <IconTextInput
-        icon={<img src="src/assets/pickUpBadgeBlank.svg" alt="Pick Up" />}
-      />
-      <IconTextInput
-        icon={<img src="src/assets/dropOffBadgeBlank.svg" alt="Drop Off" />}
+        iconPath="src/assets/dropOffBadgeBlank.svg"
+        alt="Drop Off"
       />
       <Button />
     </div>
