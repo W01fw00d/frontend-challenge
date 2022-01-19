@@ -2,17 +2,17 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 
-import TextField from "../atoms/TextField";
+import TextInput from "../atoms/TextInput";
 
 import pickUpBadgeBlank from "@mui/icons-material";
 
-function IconTextField({ icon }) {
+function IconTextInput({ icon }) {
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end" }}>
       {icon}
-      <TextField />
+      <TextInput />
     </Box>
   );
 }
 
-export default IconTextField;
+export default IconTextInput;

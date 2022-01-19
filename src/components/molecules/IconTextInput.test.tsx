@@ -5,7 +5,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-import App from "./IconTextField";
+import App from "./IconTextInput";
 
 describe("App", () => {
   test("renders App component", () => {

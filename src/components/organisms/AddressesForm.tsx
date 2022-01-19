@@ -1,15 +1,15 @@
 import React from "react";
 
 import Button from "../atoms/Button";
-import IconTextField from "../molecules/IconTextField";
+import IconTextInput from "../molecules/IconTextInput";
 
 function AddressesForm() {
   return (
     <div>
-      <IconTextField
+      <IconTextInput
         icon={<img src="src/assets/pickUpBadgeBlank.svg" alt="Pick Up" />}
       />
-      <IconTextField
+      <IconTextInput
         icon={<img src="src/assets/dropOffBadgeBlank.svg" alt="Drop Off" />}
       />
       <Button />
