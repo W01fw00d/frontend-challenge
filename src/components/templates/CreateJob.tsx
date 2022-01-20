@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { styled } from "@mui/system";
 
 import AddressesForm from "../organisms/AddressesForm";
 import Toaster from "../atoms/Toaster";
+import Map from "../organisms/Map";
 
 function CreateJobTemplate() {
-  const Map = styled("div")({
+  const Background = styled("div")({
     position: "fixed",
     width: "100%",
     height: "100%",
@@ -14,26 +15,9 @@ function CreateJobTemplate() {
     top: 0,
   });
 
-  useEffect(() => {
-    new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 41.0082, lng: 28.9784 },
-      zoom: 8,
-    });
-  }, []);
-
   return (
-    <Map>
-      <div
-        style={{
-          position: "fixed",
-          width: "100%",
-          height: "100%",
-          left: 0,
-          top: 0,
-        }}
-        id="map"
-      />
-
+    <Background>
+      <Map />
       <AddressesForm
         styles={{
           position: "fixed",
@@ -42,7 +26,7 @@ function CreateJobTemplate() {
         }}
       />
       <Toaster message="Job has been created successfully!" />
-    </Map>
+    </Background>
   );
 }
 
