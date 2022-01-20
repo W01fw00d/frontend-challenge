@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 import Button from "../atoms/Button";
 import IconTextInput from "../molecules/IconTextInput";
 
-function AddressesForm({ styles }) {
+function AddressesForm({ styles, positionsState, geocodeAddress }) {
   const FormBox = styled("div")({
     display: "flex",
     flexDirection: "column",
@@ -19,19 +19,36 @@ function AddressesForm({ styles }) {
     ...styles,
   });
 
+  const ICONS_PATHS = {
+    pickUp: {
+      blank: "src/assets/pickUpBadgeBlank.svg",
+      present: "src/assets/pickUpBadgePresent.svg",
+      error: "src/assets/pickUpBadgeError.svg",
+    },
+    dropOff: {
+      blank: "src/assets/dropOffBadgeBlank.svg",
+      present: "src/assets/dropOffBadgePresent.svg",
+      error: "src/assets/dropOffBadgeError.svg",
+    },
+  };
+
   return (
     <FormBox>
       <IconTextInput
-        iconPath="src/assets/pickUpBadgeBlank.svg"
+        id="pickUp"
+        iconPath={ICONS_PATHS.pickUp[positionsState.pickUp.state]}
         alt="Pick Up badge with grey background"
         placeholder={"Pick up address"}
         styles={{ marginBottom: "16px" }}
+        geocodeAddress={geocodeAddress}
       />
       <IconTextInput
-        iconPath="src/assets/dropOffBadgeBlank.svg"
+        id="dropOff"
+        iconPath={ICONS_PATHS.dropOff[positionsState.dropOff.state]}
         alt="Drop off badge with grey background"
         placeholder={"Drop off address"}
         styles={{ marginBottom: "16px" }}
+        geocodeAddress={geocodeAddress}
       />
       <Button
         label="Create job"

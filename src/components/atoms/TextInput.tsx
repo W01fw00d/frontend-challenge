@@ -1,7 +1,13 @@
 import React from "react";
 import { Input as MuiInput } from "@mui/material";
 
-function TextInput({ placeholder }) {
+interface Props {
+  id: string;
+  placeholder: string;
+  geocodeAddress: Function;
+}
+
+function TextInput({ id, placeholder, geocodeAddress }: Props) {
   const styles = {
     borderRadius: "4px",
     height: "32px",
@@ -30,7 +36,14 @@ function TextInput({ placeholder }) {
     },
   };
 
-  return <MuiInput id="pick-up-field" placeholder={placeholder} sx={styles} />;
+  return (
+    <MuiInput
+      id={id}
+      placeholder={placeholder}
+      sx={styles}
+      onBlur={geocodeAddress}
+    />
+  );
 }
 
 export default TextInput;

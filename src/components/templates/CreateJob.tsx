@@ -6,7 +6,7 @@ import AddressesForm from "../organisms/AddressesForm";
 import Toaster from "../atoms/Toaster";
 import Map from "../organisms/Map";
 
-function CreateJobTemplate() {
+function CreateJobTemplate({ positionsState, geocodeAddress }) {
   const Background = styled("div")({
     position: "fixed",
     width: "100%",
@@ -17,13 +17,15 @@ function CreateJobTemplate() {
 
   return (
     <Background>
-      <Map />
+      <Map positionsState={positionsState} />
       <AddressesForm
         styles={{
           position: "fixed",
           left: 0,
           top: 0,
         }}
+        positionsState={positionsState}
+        geocodeAddress={geocodeAddress}
       />
       <Toaster message="Job has been created successfully!" />
     </Background>
