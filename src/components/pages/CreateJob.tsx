@@ -17,9 +17,16 @@ function CreateJobPage() {
   };
 
   const [positionsState, setPositionsState] = useState({
-    pickUp: { state: "blank" },
-    dropOff: { state: "blank" },
+    pickUp: { state: "blank", value: "" },
+    dropOff: { state: "blank", value: "" },
   });
+
+  const setPosition = (id, value) => {
+    setPositionsState({
+      ...positionsState,
+      [id]: { ...positionsState[id], value },
+    });
+  };
 
   const geocodeAddress = (data) => {
     console.log(
@@ -49,6 +56,7 @@ function CreateJobPage() {
   return (
     <CreateJobTemplate
       positionsState={positionsState}
+      setPosition={setPosition}
       geocodeAddress={geocodeAddress}
     />
   );

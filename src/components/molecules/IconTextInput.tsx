@@ -11,6 +11,8 @@ function IconTextInput({
   id,
   placeholder,
   styles = {},
+  value,
+  onChange,
   geocodeAddress,
 }) {
   const IconImg = styled("img")({
@@ -23,6 +25,8 @@ function IconTextInput({
       <TextInput
         id={id}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         geocodeAddress={geocodeAddress}
       />
     </Box>

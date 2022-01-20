@@ -7,7 +7,13 @@ interface Props {
   geocodeAddress: Function;
 }
 
-function TextInput({ id, placeholder, geocodeAddress }: Props) {
+function TextInput({
+  id,
+  placeholder,
+  value,
+  onChange,
+  geocodeAddress,
+}: Props) {
   const styles = {
     borderRadius: "4px",
     height: "32px",
@@ -41,6 +47,8 @@ function TextInput({ id, placeholder, geocodeAddress }: Props) {
       id={id}
       placeholder={placeholder}
       sx={styles}
+      value={value}
+      onChange={onChange}
       onBlur={geocodeAddress}
     />
   );

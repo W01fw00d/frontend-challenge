@@ -5,20 +5,25 @@ import { styled } from "@mui/system";
 import Button from "../atoms/Button";
 import IconTextInput from "../molecules/IconTextInput";
 
-function AddressesForm({ styles, positionsState, geocodeAddress }) {
-  const FormBox = styled("div")({
-    display: "flex",
-    flexDirection: "column",
+const FormBox = styled("div")(({ styles }) => ({
+  display: "flex",
+  flexDirection: "column",
 
-    width: "400px",
-    borderRadius: "8px",
-    padding: "16px",
-    margin: "32px",
-    backgroundColor: "white",
-    boxShadow: "0 1px 2px 0 rgba(0,0,0,0.10), 0 1px 8px 0 rgba(0,0,0,0.10)",
-    ...styles,
-  });
+  width: "400px",
+  borderRadius: "8px",
+  padding: "16px",
+  margin: "32px",
+  backgroundColor: "white",
+  boxShadow: "0 1px 2px 0 rgba(0,0,0,0.10), 0 1px 8px 0 rgba(0,0,0,0.10)",
+  ...styles,
+}));
 
+function AddressesForm({
+  styles,
+  positionsState,
+  setPosition,
+  geocodeAddress,
+}) {
   const ICONS_PATHS = {
     pickUp: {
       blank: "src/assets/pickUpBadgeBlank.svg",
@@ -33,13 +38,17 @@ function AddressesForm({ styles, positionsState, geocodeAddress }) {
   };
 
   return (
-    <FormBox>
+    <FormBox styles={styles}>
       <IconTextInput
         id="pickUp"
         iconPath={ICONS_PATHS.pickUp[positionsState.pickUp.state]}
         alt="Pick Up badge with grey background"
         placeholder={"Pick up address"}
         styles={{ marginBottom: "16px" }}
+        value={positionsState.pickUp.value}
+        onChange={(event) => {
+          setPosition("pickUp", event.currentTarget.value);
+        }}
         geocodeAddress={geocodeAddress}
       />
       <IconTextInput
@@ -48,12 +57,16 @@ function AddressesForm({ styles, positionsState, geocodeAddress }) {
         alt="Drop off badge with grey background"
         placeholder={"Drop off address"}
         styles={{ marginBottom: "16px" }}
+        value={positionsState.dropOff.value}
+        onChange={(event) => {
+          setPosition("dropOff", event.currentTarget.value);
+        }}
         geocodeAddress={geocodeAddress}
       />
       <Button
         label="Create job"
         styles={{ width: "360px", alignSelf: "flex-end" }}
-        /* disabled */ // TODO: disable during request
+        // disabled // TODO: disable during request
       />
     </FormBox>
   );
