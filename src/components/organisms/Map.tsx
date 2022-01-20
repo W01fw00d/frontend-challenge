@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 function Map() {
   useEffect(() => {
+    // Mocked geocoded positions
     const CENTER_POSITION = {
       address: "Place De La Concorde",
       lat: 48.865551,
