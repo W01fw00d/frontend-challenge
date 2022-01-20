@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 import Button from "../atoms/Button";
 import IconTextInput from "../molecules/IconTextInput";
 
-function AddressesForm() {
+function AddressesForm({ styles }) {
   const FormBox = styled("div")({
     display: "flex",
     flexDirection: "column",
@@ -16,6 +16,7 @@ function AddressesForm() {
     margin: "32px",
     backgroundColor: "white",
     boxShadow: "0 1px 2px 0 rgba(0,0,0,0.10), 0 1px 8px 0 rgba(0,0,0,0.10)",
+    ...styles,
   });
 
   return (
