@@ -22,9 +22,12 @@ function Toaster({ isOpen, message, styles = {}, close }) {
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       open={isOpen}
-      /* autoHideDuration={5000}
-      onClose={close} */
-      /* TODO: try to implement a setInterval better than relying on autoHideDuration which behaves strangely*/
+      autoHideDuration={5000}
+      onClose={(_, reason: string) => {
+        if (reason === "timeout") {
+          close();
+        }
+      }}
       onClick={close}
       message={message}
       sx={defaultStyles}
