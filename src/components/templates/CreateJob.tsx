@@ -20,6 +20,7 @@ function CreateJobTemplate({
   setPosition,
   geocodeAddress,
   createJob,
+  resetJobState,
 }) {
   return (
     <Background>
@@ -37,8 +38,9 @@ function CreateJobTemplate({
         createJob={createJob}
       />
       <Toaster
-        open={createJobState === "successful"}
+        isOpen={createJobState === "successful"}
         message="Job has been created successfully!"
+        close={resetJobState}
       />
     </Background>
   );

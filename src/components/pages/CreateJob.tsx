@@ -11,7 +11,11 @@ function CreateJobPage() {
     dropOff: { state: "blank", value: "" },
   });
 
-  const [createJobState, setCreateJobState] = useState();
+  const [createJobState, setCreateJobState] = useState("successful");
+
+  const resetJobState = () => {
+    setCreateJobState();
+  };
 
   const setPosition = (id, value) => {
     setPositionsState({
@@ -72,6 +76,7 @@ function CreateJobPage() {
       setPosition={setPosition}
       geocodeAddress={geocodeAddress}
       createJob={createJob}
+      resetJobState={resetJobState}
     />
   );
 }

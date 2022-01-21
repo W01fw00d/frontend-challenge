@@ -1,7 +1,7 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
 
-function Toaster({ open, message, styles = {} }) {
+function Toaster({ isOpen, message, styles = {}, close }) {
   const defaultStyles = {
     "&.MuiSnackbar-root": {
       top: "32px !important",
@@ -21,10 +21,11 @@ function Toaster({ open, message, styles = {} }) {
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      open={open}
-      onClose={() => {
-        /* TODO */
-      }}
+      open={isOpen}
+      /* autoHideDuration={5000}
+      onClose={close} */
+      /* TODO: try to implement a setInterval better than relying on autoHideDuration which behaves strangely*/
+      onClick={close}
       message={message}
       sx={defaultStyles}
     />
