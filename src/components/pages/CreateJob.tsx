@@ -6,14 +6,29 @@ import { geocodeAddressRequest, createJobRequest } from "../../api/main";
 import CreateJobTemplate from "../templates/CreateJob";
 
 function CreateJobPage() {
-  const BLANK_POSITION_STATE = {
-    pickUp: { state: "blank", value: "" },
-    dropOff: { state: "blank", value: "" },
-  };
+  const BLANK_POSITION_STATE = { state: "blank" };
 
-  const [positionsState, setPositionsState] = useState({
+  const BLANK_FORM_STATE = { pickUp: "", dropOff: "" };
+
+  const [pickUpPositionsState, setPickUpPositionsState] = useState({
     ...BLANK_POSITION_STATE,
   });
+
+  const [dropOffPositionsState, setDropOffPositionsState] = useState({
+    ...BLANK_POSITION_STATE,
+  });
+
+  const positionsState = {
+    pickUp: pickUpPositionsState,
+    dropOff: dropOffPositionsState,
+  };
+
+  const setPositionsState = {
+    pickUp: setPickUpPositionsState,
+    dropOff: setDropOffPositionsState,
+  };
+
+  const [formState, setFormState] = useState({ ...BLANK_FORM_STATE });
 
   const [createJobState, setCreateJobState] = useState();
 
@@ -21,10 +36,10 @@ function CreateJobPage() {
     setCreateJobState();
   };
 
-  const setPosition = (id, value) => {
-    setPositionsState({
-      ...positionsState,
-      [id]: { ...positionsState[id], value },
+  const setForm = (id, value) => {
+    setFormState({
+      ...formState,
+      [id]: value,
     });
   };
 
@@ -35,62 +50,52 @@ function CreateJobPage() {
     if (value) {
       geocodeAddressRequest(target.value).then((result) => {
         if (result.errors) {
-          setPositionsState({
-            ...positionsState,
-            [id]: {
-              value: target.value,
-              state: "error",
-            },
+          setPositionsState[id]({
+            state: "error",
           });
         } else {
           const geocode = result.data.geocode;
-          setPositionsState({
-            ...positionsState,
-            [id]: {
-              ...positionsState[id],
-              value: target.value,
-              state: "present",
-              geocode: {
-                lat: geocode.latitude,
-                lng: geocode.longitude,
-              },
+          setPositionsState[id]({
+            state: "present",
+            geocode: {
+              lat: geocode.latitude,
+              lng: geocode.longitude,
             },
           });
         }
       });
     } else {
-      setPositionsState({
-        ...positionsState,
-        [id]: {
-          value: "",
-          state: "blank",
-        },
+      setPositionsState[id]({
+        state: "blank",
       });
     }
   };
 
   const createJob = () => {
     setCreateJobState("inProcess");
-    createJobRequest(
-      positionsState.pickUp.value,
-      positionsState.dropOff.value
-    ).then((result) => {
+    createJobRequest(formState.pickUp, formState.dropOff).then((result) => {
       if (result.errors) {
         setCreateJobState(null);
       } else {
         setCreateJobState("successful");
-        setPositionsState({
+        setPickUpPositionsState({
           ...BLANK_POSITION_STATE,
         });
+        setDropOffPositionsState({
+          ...BLANK_POSITION_STATE,
+        });
+
+        setFormState({ ...BLANK_FORM_STATE });
       }
     });
   };
 
   return (
     <CreateJobTemplate
+      formState={formState}
       positionsState={positionsState}
       createJobState={createJobState}
-      setPosition={setPosition}
+      setPosition={setForm}
       geocodeAddress={geocodeAddress}
       createJob={createJob}
       resetJobState={resetJobState}

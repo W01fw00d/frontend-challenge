@@ -15,6 +15,7 @@ const Background = styled("div")({
 });
 
 function CreateJobTemplate({
+  formState,
   positionsState,
   createJobState,
   setPosition,
@@ -31,6 +32,7 @@ function CreateJobTemplate({
           left: 0,
           top: 0,
         }}
+        formState={formState}
         createJobState={createJobState}
         positionsState={positionsState}
         setPosition={setPosition}

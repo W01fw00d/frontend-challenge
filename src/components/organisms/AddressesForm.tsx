@@ -20,6 +20,7 @@ const FormBox = styled("div")(({ styles }) => ({
 
 function AddressesForm({
   styles,
+  formState,
   createJobState,
   positionsState,
   setPosition,
@@ -47,7 +48,7 @@ function AddressesForm({
         alt="Pick Up badge with grey background"
         placeholder={"Pick up address"}
         styles={{ marginBottom: "16px" }}
-        value={positionsState.pickUp.value}
+        value={formState.pickUp}
         onChange={(event) => {
           setPosition("pickUp", event.target.value);
         }}
@@ -59,7 +60,7 @@ function AddressesForm({
         alt="Drop off badge with grey background"
         placeholder={"Drop off address"}
         styles={{ marginBottom: "16px" }}
-        value={positionsState.dropOff.value}
+        value={formState.dropOff}
         onChange={(event) => {
           setPosition("dropOff", event.target.value);
         }}
