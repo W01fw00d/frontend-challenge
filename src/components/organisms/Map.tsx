@@ -1,6 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-function Map() {
+function Map({ positionsState }) {
+  let [mapState, setMapState] = useState();
+  let [markersState, setMarkersState] = useState({
+    pickUp: null,
+    dropOff: null,
+  });
+
   useEffect(() => {
     // Mocked geocoded positions
     const CENTER_POSITION = {
@@ -9,42 +15,57 @@ function Map() {
       lng: 2.32079,
     };
 
-    const PICKUP_POSITION = {
-      address: "29 Rue Du 4 Septembre",
-      lat: 48.86985,
-      lng: 2.33457,
-    };
-
-    const DROPOFF_POSITION = {
-      address: "15 Rue de Bourgogne",
-      lat: 48.85908,
-      lng: 2.31804,
-    };
-
-    const map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: CENTER_POSITION.lat, lng: CENTER_POSITION.lng },
-      zoom: 15,
-    });
-
-    const pickUpMarker = new google.maps.Marker({
-      position: PICKUP_POSITION,
-      icon: "src/assets/pickUpMarker.svg",
-      map: map,
-    });
-
-    const dropOffMarker = new google.maps.Marker({
-      position: DROPOFF_POSITION,
-      icon: "src/assets/dropOffMarker.svg",
-      map: map,
-    });
+    setMapState(
+      new window.google.maps.Map(document.getElementById("map"), {
+        center: { lat: CENTER_POSITION.lat, lng: CENTER_POSITION.lng },
+        zoom: 15,
+      })
+    );
 
     const removeMarkers = () => {
       pickUpMarker.setMap(null);
       dropOffMarker.setMap(null);
     };
 
-    removeMarkers();
+    // removeMarkers();
   }, []);
+
+  useEffect(() => {
+    // const removeMarker = (marker) => marker.setMap(null);
+
+    if (!markersState.pickUp && positionsState.pickUp.lat) {
+      setMarkersState({
+        ...markersState,
+        pickUp: new google.maps.Marker({
+          position: {
+            lat: positionsState.pickUp.lat,
+            lng: positionsState.pickUp.lng,
+          },
+          icon: "src/assets/pickUpMarker.svg",
+          map: mapState,
+        }),
+      });
+    }
+
+    if (!markersState.dropOff && positionsState.dropOff.lat) {
+      setMarkersState({
+        ...markersState,
+        dropOff: new google.maps.Marker({
+          position: {
+            lat: positionsState.dropOff.lat,
+            lng: positionsState.dropOff.lng,
+          },
+          icon: "src/assets/dropOffMarker.svg",
+          map: mapState,
+        }),
+      });
+    }
+
+    /* else if (markersState.pickUp) {
+      removeMarker(markersState);
+      setMarkersState({ ...markersState, pickUp: null });
+    } */
+  }, [positionsState]);
 
   return (
     <div

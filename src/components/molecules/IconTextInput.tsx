@@ -5,7 +5,16 @@ import { styled } from "@mui/system";
 
 import TextInput from "../atoms/TextInput";
 
-function IconTextInput({ iconPath, alt, placeholder, styles = {} }) {
+function IconTextInput({
+  iconPath,
+  alt,
+  id,
+  placeholder,
+  styles = {},
+  value,
+  onChange,
+  geocodeAddress,
+}) {
   const IconImg = styled("img")({
     margin: "0 8px 0 0",
   });
@@ -13,7 +22,13 @@ function IconTextInput({ iconPath, alt, placeholder, styles = {} }) {
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end", ...styles }}>
       <IconImg src={iconPath} alt={alt} />
-      <TextInput placeholder={placeholder} />
+      <TextInput
+        id={id}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        geocodeAddress={geocodeAddress}
+      />
     </Box>
   );
 }
