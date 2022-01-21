@@ -1,7 +1,7 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
 
-function Toaster({ message, styles = {} }) {
+function Toaster({ open, message, styles = {} }) {
   const defaultStyles = {
     "&.MuiSnackbar-root": {
       top: "32px !important",
@@ -21,7 +21,7 @@ function Toaster({ message, styles = {} }) {
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      open={true}
+      open={open}
       onClose={() => {
         /* TODO */
       }}

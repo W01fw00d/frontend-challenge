@@ -20,9 +20,11 @@ const FormBox = styled("div")(({ styles }) => ({
 
 function AddressesForm({
   styles,
+  createJobState,
   positionsState,
   setPosition,
   geocodeAddress,
+  createJob,
 }) {
   const ICONS_PATHS = {
     pickUp: {
@@ -64,9 +66,14 @@ function AddressesForm({
         geocodeAddress={geocodeAddress}
       />
       <Button
-        label="Create job"
+        label={createJobState === "inProcess" ? "Creating..." : "Create job"}
         styles={{ width: "360px", alignSelf: "flex-end" }}
-        // disabled // TODO: disable during request
+        disabled={
+          createJobState === "inProcess" ||
+          positionsState.pickUp.state !== "present" ||
+          positionsState.dropOff.state !== "present"
+        }
+        onClick={createJob}
       />
     </FormBox>
   );

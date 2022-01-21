@@ -49,7 +49,7 @@ function Map({ positionsState }) {
       });
     }
 
-    if (!markersState.dropOff && positionsState.dropOff.lat) {
+    if (!markersState.dropOff && positionsState.dropOff.geocode) {
       const geocode = positionsState.dropOff.geocode;
 
       setMarkersState({
