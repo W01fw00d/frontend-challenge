@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input as MuiInput } from "@mui/material";
 
 interface Props {
@@ -14,6 +14,8 @@ function TextInput({
   onChange,
   geocodeAddress,
 }: Props) {
+  let [timer, setTimer] = useState();
+
   const styles = {
     borderRadius: "4px",
     height: "32px",
@@ -48,8 +50,20 @@ function TextInput({
       placeholder={placeholder}
       sx={styles}
       value={value}
-      onChange={onChange}
-      onBlur={geocodeAddress}
+      onChange={(event) => {
+        onChange(event);
+
+        clearTimeout(timer);
+        setTimer(
+          setTimeout(() => {
+            geocodeAddress(event);
+          }, 1500)
+        );
+      }}
+      onBlur={(event) => {
+        clearTimeout(timer);
+        geocodeAddress(event);
+      }}
     />
   );
 }

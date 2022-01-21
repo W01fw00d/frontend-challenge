@@ -49,7 +49,7 @@ function AddressesForm({
         styles={{ marginBottom: "16px" }}
         value={positionsState.pickUp.value}
         onChange={(event) => {
-          setPosition("pickUp", event.currentTarget.value);
+          setPosition("pickUp", event.target.value);
         }}
         geocodeAddress={geocodeAddress}
       />
@@ -61,7 +61,7 @@ function AddressesForm({
         styles={{ marginBottom: "16px" }}
         value={positionsState.dropOff.value}
         onChange={(event) => {
-          setPosition("dropOff", event.currentTarget.value);
+          setPosition("dropOff", event.target.value);
         }}
         geocodeAddress={geocodeAddress}
       />
