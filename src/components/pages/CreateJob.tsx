@@ -59,6 +59,15 @@ function CreateJobPage() {
           });
         }
       });
+    } else {
+      setPositionsState({
+        ...positionsState,
+        [id]: {
+          ...positionsState[id],
+          value: target.value,
+          state: "blank",
+        },
+      });
     }
   };
 
