@@ -28,33 +28,38 @@ function CreateJobPage() {
     });
   };
 
-  const geocodeAddress = ({ currentTarget }) => {
-    const id = currentTarget.id;
+  const geocodeAddress = ({ target }) => {
+    const id = target.id;
+    const value = target.value;
 
-    geocodeAddressRequest(currentTarget.value).then((result) => {
-      if (result.errors) {
-        setPositionsState({
-          ...positionsState,
-          [id]: {
-            ...positionsState[id],
-            state: "error",
-          },
-        });
-      } else {
-        const geocode = result.data.geocode;
-        setPositionsState({
-          ...positionsState,
-          [id]: {
-            ...positionsState[id],
-            state: "present",
-            geocode: {
-              lat: geocode.latitude,
-              lng: geocode.longitude,
+    if (value) {
+      geocodeAddressRequest(target.value).then((result) => {
+        if (result.errors) {
+          setPositionsState({
+            ...positionsState,
+            [id]: {
+              ...positionsState[id],
+              value: target.value,
+              state: "error",
             },
-          },
-        });
-      }
-    });
+          });
+        } else {
+          const geocode = result.data.geocode;
+          setPositionsState({
+            ...positionsState,
+            [id]: {
+              ...positionsState[id],
+              value: target.value,
+              state: "present",
+              geocode: {
+                lat: geocode.latitude,
+                lng: geocode.longitude,
+              },
+            },
+          });
+        }
+      });
+    }
   };
 
   const createJob = () => {
