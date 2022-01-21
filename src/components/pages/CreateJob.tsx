@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import { geocodeAddressRequest } from "../../api/geocode";
+// import { geocodeAddressRequest, createJobRequest } from "../../api/main";
+import { geocodeAddressRequest, createJobRequest } from "../../api/mainMocked";
 
 import CreateJobTemplate from "../templates/CreateJob";
 
@@ -9,6 +10,8 @@ function CreateJobPage() {
     pickUp: { state: "blank", value: "" },
     dropOff: { state: "blank", value: "" },
   });
+
+  const [createJobState, setCreateJobState] = useState();
 
   const setPosition = (id, value) => {
     setPositionsState({
@@ -36,10 +39,28 @@ function CreateJobPage() {
           [id]: {
             ...positionsState[id],
             state: "present",
-            lat: geocode.latitude,
-            lng: geocode.longitude,
+            geocode: {
+              lat: geocode.latitude,
+              lng: geocode.longitude,
+            },
           },
         });
+      }
+    });
+  };
+
+  const createJob = () => {
+    setCreateJobState("inProcess");
+    createJobRequest(
+      positionsState.pickUp.value,
+      positionsState.dropOff.value
+    ).then((result) => {
+      console.log("createJob", result);
+
+      if (result.errors) {
+        setCreateJobState(null);
+      } else {
+        setCreateJobState("successful");
       }
     });
   };
@@ -47,8 +68,10 @@ function CreateJobPage() {
   return (
     <CreateJobTemplate
       positionsState={positionsState}
+      createJobState={createJobState}
       setPosition={setPosition}
       geocodeAddress={geocodeAddress}
+      createJob={createJob}
     />
   );
 }

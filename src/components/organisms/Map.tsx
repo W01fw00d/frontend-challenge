@@ -33,13 +33,15 @@ function Map({ positionsState }) {
   useEffect(() => {
     // const removeMarker = (marker) => marker.setMap(null);
 
-    if (!markersState.pickUp && positionsState.pickUp.lat) {
+    if (!markersState.pickUp && positionsState.pickUp.geocode) {
+      const geocode = positionsState.pickUp.geocode;
+
       setMarkersState({
         ...markersState,
         pickUp: new google.maps.Marker({
           position: {
-            lat: positionsState.pickUp.lat,
-            lng: positionsState.pickUp.lng,
+            lat: geocode.lat,
+            lng: geocode.lng,
           },
           icon: "src/assets/pickUpMarker.svg",
           map: mapState,
@@ -47,13 +49,15 @@ function Map({ positionsState }) {
       });
     }
 
-    if (!markersState.dropOff && positionsState.dropOff.lat) {
+    if (!markersState.dropOff && positionsState.dropOff.geocode) {
+      const geocode = positionsState.dropOff.geocode;
+
       setMarkersState({
         ...markersState,
         dropOff: new google.maps.Marker({
           position: {
-            lat: positionsState.dropOff.lat,
-            lng: positionsState.dropOff.lng,
+            lat: geocode.lat,
+            lng: geocode.lng,
           },
           icon: "src/assets/dropOffMarker.svg",
           map: mapState,

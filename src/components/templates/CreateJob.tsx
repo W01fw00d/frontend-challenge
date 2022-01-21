@@ -14,7 +14,13 @@ const Background = styled("div")({
   top: 0,
 });
 
-function CreateJobTemplate({ positionsState, setPosition, geocodeAddress }) {
+function CreateJobTemplate({
+  positionsState,
+  createJobState,
+  setPosition,
+  geocodeAddress,
+  createJob,
+}) {
   return (
     <Background>
       <Map positionsState={positionsState} />
@@ -24,11 +30,16 @@ function CreateJobTemplate({ positionsState, setPosition, geocodeAddress }) {
           left: 0,
           top: 0,
         }}
+        createJobState={createJobState}
         positionsState={positionsState}
         setPosition={setPosition}
         geocodeAddress={geocodeAddress}
+        createJob={createJob}
       />
-      <Toaster message="Job has been created successfully!" />
+      <Toaster
+        open={createJobState === "successful"}
+        message="Job has been created successfully!"
+      />
     </Background>
   );
 }
