@@ -6,12 +6,16 @@ import { geocodeAddressRequest, createJobRequest } from "../../api/mainMocked";
 import CreateJobTemplate from "../templates/CreateJob";
 
 function CreateJobPage() {
-  const [positionsState, setPositionsState] = useState({
+  const BLANK_POSITION_STATE = {
     pickUp: { state: "blank", value: "" },
     dropOff: { state: "blank", value: "" },
+  };
+
+  const [positionsState, setPositionsState] = useState({
+    ...BLANK_POSITION_STATE,
   });
 
-  const [createJobState, setCreateJobState] = useState("successful");
+  const [createJobState, setCreateJobState] = useState();
 
   const resetJobState = () => {
     setCreateJobState();
@@ -59,12 +63,13 @@ function CreateJobPage() {
       positionsState.pickUp.value,
       positionsState.dropOff.value
     ).then((result) => {
-      console.log("createJob", result);
-
       if (result.errors) {
         setCreateJobState(null);
       } else {
         setCreateJobState("successful");
+        setPositionsState({
+          ...BLANK_POSITION_STATE,
+        });
       }
     });
   };
