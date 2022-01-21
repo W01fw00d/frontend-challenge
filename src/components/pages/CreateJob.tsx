@@ -38,7 +38,6 @@ function CreateJobPage() {
           setPositionsState({
             ...positionsState,
             [id]: {
-              ...positionsState[id],
               value: target.value,
               state: "error",
             },
@@ -63,8 +62,7 @@ function CreateJobPage() {
       setPositionsState({
         ...positionsState,
         [id]: {
-          ...positionsState[id],
-          value: target.value,
+          value: "",
           state: "blank",
         },
       });
