@@ -21,7 +21,7 @@ const FormBox = styled("div")(({ styles }: any) => ({
 interface Props {
   styles: object;
   formState: object;
-  createJobState: string;
+  createJobState: string | null;
   positionsState: object;
   setPosition: Function;
   geocodeAddress: Function;

@@ -4,11 +4,10 @@ import Snackbar from "@mui/material/Snackbar";
 interface Props {
   isOpen: boolean;
   message: string;
-  styles: object;
   close: Function;
 }
 
-function Toaster({ isOpen, message, styles = {}, close }: Props) {
+function Toaster({ isOpen, message, close }: Props) {
   const defaultStyles = {
     "&.MuiSnackbar-root": {
       top: "32px !important",
@@ -21,8 +20,6 @@ function Toaster({ isOpen, message, styles = {}, close }: Props) {
       fontSize: "16px",
       color: "#FFFFFF",
     },
-
-    ...styles,
   };
 
   return (

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-function Map({ positionsState }) {
+interface Props {
+  positionsState: object;
+}
+
+function Map({ positionsState }: Props) {
   let [mapState, setMapState] = useState();
   let [markersState, setMarkersState] = useState({
     pickUp: null,
@@ -24,7 +28,7 @@ function Map({ positionsState }) {
   }, []);
 
   useEffect(() => {
-    const removeMarker = (marker) => marker.setMap(null);
+    const removeMarker = (marker: any) => marker.setMap(null);
 
     if (positionsState.pickUp.geocode) {
       if (!markersState.pickUp) {

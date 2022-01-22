@@ -30,20 +30,20 @@ function CreateJobPage() {
 
   const [formState, setFormState] = useState({ ...BLANK_FORM_STATE });
 
-  const [createJobState, setCreateJobState] = useState();
+  const [createJobState, setCreateJobState] = useState<string | null>(null);
 
   const resetJobState = () => {
-    setCreateJobState();
+    setCreateJobState(null);
   };
 
-  const setForm = (id, value) => {
+  const setForm = (id: string, value: string) => {
     setFormState({
       ...formState,
       [id]: value,
     });
   };
 
-  const geocodeAddress = ({ target }) => {
+  const geocodeAddress = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     const id = target.id;
     const value = target.value;
 

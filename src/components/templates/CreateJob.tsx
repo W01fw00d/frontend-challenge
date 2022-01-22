@@ -14,6 +14,16 @@ const Background = styled("div")({
   top: 0,
 });
 
+interface Props {
+  formState: object;
+  positionsState: object;
+  createJobState: string | null;
+  setPosition: Function;
+  geocodeAddress: Function;
+  createJob: Function;
+  resetJobState: Function;
+}
+
 function CreateJobTemplate({
   formState,
   positionsState,
@@ -22,7 +32,7 @@ function CreateJobTemplate({
   geocodeAddress,
   createJob,
   resetJobState,
-}) {
+}: Props) {
   return (
     <Background>
       <Map positionsState={positionsState} />
