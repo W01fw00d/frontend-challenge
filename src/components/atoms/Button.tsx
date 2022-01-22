@@ -1,8 +1,15 @@
 import React from "react";
 import { Button as MuiButton } from "@mui/material";
 
-function Button({ label, styles = {}, disabled = false, onClick }) {
-  const defaultStyles = {
+interface Props {
+  label: string;
+  styles: object;
+  disabled: boolean;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function Button({ label, styles = {}, disabled = false, onClick }: Props) {
+  const defaultStyles: any = {
     height: "40px",
     boxShadow: "0 1px 2px 0 rgba(16,162,234,0.30) !important",
     backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
