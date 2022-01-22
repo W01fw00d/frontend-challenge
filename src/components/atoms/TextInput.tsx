@@ -33,16 +33,12 @@ function TextInput({
       color: "#8596A6",
     },
 
-    "&.MuiInputBase-root": {
-      borderBottom: "none !important",
-    },
-
-    "&.MuiInputBase-root:before": {
-      borderBottom: "none !important",
+    "&.MuiInputBase-root.MuiInput-root:before": {
+      borderBottom: "none",
     },
 
     "&.MuiInputBase-root.MuiInput-root:after": {
-      borderBottom: "none !important",
+      borderBottom: "none",
     },
   };
 

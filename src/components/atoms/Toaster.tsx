@@ -10,8 +10,8 @@ interface Props {
 function Toaster({ isOpen, message, close }: Props) {
   const defaultStyles = {
     "&.MuiSnackbar-root": {
-      top: "32px !important",
-      right: "32px  !important",
+      top: "32px",
+      right: "32px",
     },
     "& .MuiPaper-root": {
       borderRadius: "8px",
