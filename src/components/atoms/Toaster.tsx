@@ -1,11 +1,17 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
 
-function Toaster({ isOpen, message, styles = {}, close }) {
+interface Props {
+  isOpen: boolean;
+  message: string;
+  close: Function;
+}
+
+function Toaster({ isOpen, message, close }: Props) {
   const defaultStyles = {
     "&.MuiSnackbar-root": {
-      top: "32px !important",
-      right: "32px  !important",
+      top: "32px",
+      right: "32px",
     },
     "& .MuiPaper-root": {
       borderRadius: "8px",
@@ -14,8 +20,6 @@ function Toaster({ isOpen, message, styles = {}, close }) {
       fontSize: "16px",
       color: "#FFFFFF",
     },
-
-    ...styles,
   };
 
   return (
@@ -28,7 +32,9 @@ function Toaster({ isOpen, message, styles = {}, close }) {
           close();
         }
       }}
-      onClick={close}
+      onClick={() => {
+        close();
+      }}
       message={message}
       sx={defaultStyles}
     />

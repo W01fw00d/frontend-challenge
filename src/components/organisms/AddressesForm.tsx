@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 import Button from "../atoms/Button";
 import IconTextInput from "../molecules/IconTextInput";
 
-const FormBox = styled("div")(({ styles }) => ({
+const FormBox = styled("div")(({ styles }: any) => ({
   display: "flex",
   flexDirection: "column",
 
@@ -18,14 +18,25 @@ const FormBox = styled("div")(({ styles }) => ({
   ...styles,
 }));
 
+interface Props {
+  styles: object;
+  formState: object;
+  createJobState: string | null;
+  positionsState: object;
+  setPosition: Function;
+  geocodeAddress: Function;
+  createJob: Function;
+}
+
 function AddressesForm({
   styles,
+  formState,
   createJobState,
   positionsState,
   setPosition,
   geocodeAddress,
   createJob,
-}) {
+}: Props) {
   const ICONS_PATHS = {
     pickUp: {
       blank: "src/assets/pickUpBadgeBlank.svg",
@@ -47,8 +58,8 @@ function AddressesForm({
         alt="Pick Up badge with grey background"
         placeholder={"Pick up address"}
         styles={{ marginBottom: "16px" }}
-        value={positionsState.pickUp.value}
-        onChange={(event) => {
+        value={formState.pickUp}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setPosition("pickUp", event.target.value);
         }}
         geocodeAddress={geocodeAddress}
@@ -59,8 +70,8 @@ function AddressesForm({
         alt="Drop off badge with grey background"
         placeholder={"Drop off address"}
         styles={{ marginBottom: "16px" }}
-        value={positionsState.dropOff.value}
-        onChange={(event) => {
+        value={formState.dropOff}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setPosition("dropOff", event.target.value);
         }}
         geocodeAddress={geocodeAddress}
@@ -73,7 +84,9 @@ function AddressesForm({
           positionsState.pickUp.state !== "present" ||
           positionsState.dropOff.state !== "present"
         }
-        onClick={createJob}
+        onClick={() => {
+          createJob();
+        }}
       />
     </FormBox>
   );

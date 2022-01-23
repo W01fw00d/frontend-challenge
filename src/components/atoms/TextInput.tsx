@@ -4,6 +4,8 @@ import { Input as MuiInput } from "@mui/material";
 interface Props {
   id: string;
   placeholder: string;
+  value: string;
+  onChange: Function;
   geocodeAddress: Function;
 }
 
@@ -14,7 +16,7 @@ function TextInput({
   onChange,
   geocodeAddress,
 }: Props) {
-  let [timer, setTimer] = useState();
+  let [timer, setTimer] = useState<any>();
 
   const styles = {
     borderRadius: "4px",
@@ -31,16 +33,12 @@ function TextInput({
       color: "#8596A6",
     },
 
-    "&.MuiInputBase-root": {
-      borderBottom: "none !important",
-    },
-
-    "&.MuiInputBase-root:before": {
-      borderBottom: "none !important",
+    "&.MuiInputBase-root.MuiInput-root:before": {
+      borderBottom: "none",
     },
 
     "&.MuiInputBase-root.MuiInput-root:after": {
-      borderBottom: "none !important",
+      borderBottom: "none",
     },
   };
 
@@ -50,7 +48,7 @@ function TextInput({
       placeholder={placeholder}
       sx={styles}
       value={value}
-      onChange={(event) => {
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event);
 
         clearTimeout(timer);
@@ -60,7 +58,7 @@ function TextInput({
           }, 1500)
         );
       }}
-      onBlur={(event) => {
+      onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
         clearTimeout(timer);
         geocodeAddress(event);
       }}

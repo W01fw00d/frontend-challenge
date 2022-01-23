@@ -5,6 +5,17 @@ import { styled } from "@mui/system";
 
 import TextInput from "../atoms/TextInput";
 
+interface Props {
+  iconPath: string;
+  alt: string;
+  id: string;
+  placeholder: string;
+  styles: object;
+  value: string;
+  onChange: Function;
+  geocodeAddress: Function;
+}
+
 function IconTextInput({
   iconPath,
   alt,
@@ -14,7 +25,7 @@ function IconTextInput({
   value,
   onChange,
   geocodeAddress,
-}) {
+}: Props) {
   const IconImg = styled("img")({
     margin: "0 8px 0 0",
   });
