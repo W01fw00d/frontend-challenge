@@ -71,7 +71,9 @@ Write in a few lines how do you think the app can be improved and what would you
 
 2. Technical improvements
 
-- Storybook, as a way of displaying the components separately in a "catalog"
+- Storybook, as a way of displaying the components separately in a "catalog".
+
+- Using React context or libraries like Redux to manage state, trying to avoid props drilling.
 
 - Add tests, especially for edge cases. Ideally, I would have unit tests covering all functionality, and some functional tests with Cypress for the core features.
 
