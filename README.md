@@ -57,4 +57,25 @@ A Frontend Web App developed for the React Frontend Challenge.
 
 ## Challenge Step 5: How would you improve the app?
 
-- Write in a few lines how do you think the app can be improved and what would you do different if you had more time.
+Write in a few lines how do you think the app can be improved and what would you do different if you had more time.
+
+1. New features
+
+- Dynamically center the Google Map depending on both pickup and dropoff locations.
+
+- Autosuggest locations using previously geocoded locations.
+
+- Draw a route between the two locations on the map.
+
+- A page where users can see previously created jobs (markers and routes) and display them on a Google Map.
+
+2. Technical improvements
+
+- Storybook, as a way of displaying the components separately in a "catalog"
+
+- Add tests, especially for edge cases. Ideally, I would have unit tests covering all functionality, and some functional tests with Cypress for the core features.
+
+- Define a common palette and other common css values like paddings and margins in a common file,
+  so it can be used by all components.
+
+- I think I missed some TypeScript types in variables and functions
