@@ -10,6 +10,8 @@ Insert the `API_KEY` in the [index.html](https://github.com/W01fw00d/frontend-ch
 
 Please be aware that if the `API_KEY` doesn't belong to an account with Billing enabled, a pop-up will appear on page load and a "For development purposes only" watermark will be displayed on the map.
 
+If you don't add an `API_KEY`, only the Google Maps features will be disabled.
+
 - Commands
 
 Install the dependencies:
@@ -61,6 +63,8 @@ Write in a few lines how do you think the app can be improved and what would you
 
 1. New features
 
+- Error handling for the Create Job request: display an error message to user.
+
 - Dynamically center the Google Map depending on both pickup and dropoff locations.
 
 - Autosuggest locations using previously geocoded locations.
@@ -73,9 +77,9 @@ Write in a few lines how do you think the app can be improved and what would you
 
 - Storybook, as a way of displaying the components separately in a "catalog".
 
-- Using React context or libraries like Redux to manage state, trying to avoid props drilling.
+- Using React context or libraries like Redux to manage state, trying to avoid issues with props drilling.
 
-- Add tests, especially for edge cases. Ideally, I would have unit tests covering all functionality, and some functional tests with Cypress for the core features.
+- Add more tests, especially for edge cases. Ideally, I would have unit tests covering all functionality, and some functional tests with Cypress for the core features.
 
 - Define a common palette and other common css values like paddings and margins in a common file,
   so it can be used by all components.

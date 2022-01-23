@@ -3,7 +3,7 @@ import { Button as MuiButton } from "@mui/material";
 
 interface Props {
   label: string;
-  styles: object;
+  styles?: object;
   disabled: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }

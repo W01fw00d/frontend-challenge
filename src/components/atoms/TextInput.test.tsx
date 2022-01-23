@@ -5,16 +5,20 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-import App from "./Button";
+import TextInput from "./TextInput";
 
-describe("App", () => {
-  test("renders App component", () => {
-    render(<App />);
+describe("TextInput", () => {
+  test("Displays TextInput value", () => {
+    render(
+      <TextInput
+        id="text-input"
+        placeholder={"This is the placeholder"}
+        value="This is a TextInput"
+        onChange={() => {}}
+        geocodeAddress={() => {}}
+      />
+    );
 
-    // screen.debug();
-
-    expect(
-      screen.getByText("Hello World - Frontend Challenge!")
-    ).toBeInTheDocument();
+    expect(screen.getByDisplayValue("This is a TextInput")).toBeInTheDocument();
   });
 });
