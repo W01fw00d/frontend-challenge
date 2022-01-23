@@ -78,4 +78,4 @@ Write in a few lines how do you think the app can be improved and what would you
 - Define a common palette and other common css values like paddings and margins in a common file,
   so it can be used by all components.
 
-- I think I missed some TypeScript types in variables and functions
+- Adding more interfaces and enums to the TypeScript code
