@@ -1,32 +1,46 @@
+import {
+  Geocode,
+  GeocodeAPIResponse,
+  CreateJobAPIResponse,
+} from "../interfaces/APIResponse";
+
 // Mocked functions for testing during development process, avoiding real API requests
 
-const POSITIONS = {
+interface Positions {
+  [key: string]: Geocode;
+}
+
+const POSITIONS: Positions = {
   pick: {
-    lat: 48.86985,
-    lng: 2.33457,
+    latitude: 48.86985,
+    longitude: 2.33457,
   },
   drop: {
-    lat: 48.85908,
-    lng: 2.31804,
+    latitude: 48.85908,
+    longitude: 2.31804,
   },
 };
 
-export async function geocodeAddressRequest(address: string) {
+export async function geocodeAddressRequest(
+  address: string
+): Promise<GeocodeAPIResponse> {
   const position = POSITIONS[address];
 
-  if (position) {
-    return await {
-      data: { geocode: { latitude: position.lat, longitude: position.lng } },
-    };
-  } else {
-    return await { errors: true };
-  }
+  const result = position
+    ? {
+        data: { geocode: { ...position } },
+      }
+    : { errors: true };
+
+  return await result;
 }
 
-export async function createJobRequest(pickUp: string, dropOff: string) {
-  if (POSITIONS[pickUp] && POSITIONS[dropOff]) {
-    return await {};
-  } else {
-    return await { errors: true };
-  }
+export async function createJobRequest(
+  pickUp: string,
+  dropOff: string
+): Promise<CreateJobAPIResponse> {
+  const result =
+    POSITIONS[pickUp] && POSITIONS[dropOff] ? {} : { errors: true };
+
+  return await result;
 }

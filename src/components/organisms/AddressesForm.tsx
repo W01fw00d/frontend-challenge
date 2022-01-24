@@ -2,6 +2,7 @@ import React from "react";
 
 import { styled } from "@mui/system";
 
+import { FormState } from "../../interfaces/FormState";
 import { PositionState } from "../../interfaces/PositionState";
 import { GeocodeStatus } from "../../enums/GeocodeStatus";
 
@@ -23,7 +24,7 @@ const FormBox = styled("div")(({ styles }: any) => ({
 
 interface Props {
   styles: object;
-  formState: object;
+  formState: FormState;
   createJobState: string | null;
   positionsState: { [key: string]: PositionState };
   setPosition: Function;

@@ -4,14 +4,14 @@ import { geocodeAddressRequest, createJobRequest } from "../../api/main";
 // import { geocodeAddressRequest, createJobRequest } from "../../api/mainMocked";
 
 import { GeocodeStatus } from "../../enums/GeocodeStatus";
+import { JobStatus } from "../../enums/JobStatus";
 import { PositionState } from "../../interfaces/PositionState";
+import { FormState } from "../../interfaces/FormState";
 
 import CreateJobTemplate from "../templates/CreateJob";
 
 function CreateJobPage() {
   const BLANK_POSITION_STATE: PositionState = { status: GeocodeStatus.Blank };
-
-  const BLANK_FORM_STATE = { pickUp: "", dropOff: "" };
 
   const [pickUpPositionsState, setPickUpPositionsState] =
     useState<PositionState>({
@@ -33,9 +33,13 @@ function CreateJobPage() {
     dropOff: setDropOffPositionsState,
   };
 
-  const [formState, setFormState] = useState({ ...BLANK_FORM_STATE });
+  const BLANK_FORM_STATE: FormState = { pickUp: "", dropOff: "" };
 
-  const [createJobState, setCreateJobState] = useState<string | null>(null);
+  const [formState, setFormState] = useState<FormState>({
+    ...BLANK_FORM_STATE,
+  });
+
+  const [createJobState, setCreateJobState] = useState<JobStatus | null>(null);
 
   const resetJobState = () => {
     setCreateJobState(null);
@@ -77,12 +81,12 @@ function CreateJobPage() {
   };
 
   const createJob = () => {
-    setCreateJobState("inProcess");
+    setCreateJobState(JobStatus.InProcess);
     createJobRequest(formState.pickUp, formState.dropOff).then((result) => {
       if (result.errors) {
         setCreateJobState(null);
       } else {
-        setCreateJobState("successful");
+        setCreateJobState(JobStatus.Succesful);
         setPickUpPositionsState({
           ...BLANK_POSITION_STATE,
         });
