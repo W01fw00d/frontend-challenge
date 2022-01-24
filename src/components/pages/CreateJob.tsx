@@ -3,27 +3,32 @@ import React, { useState } from "react";
 import { geocodeAddressRequest, createJobRequest } from "../../api/main";
 // import { geocodeAddressRequest, createJobRequest } from "../../api/mainMocked";
 
+import { GeocodeStatus } from "../../enums/GeocodeStatus";
+import { PositionState } from "../../interfaces/PositionState";
+
 import CreateJobTemplate from "../templates/CreateJob";
 
 function CreateJobPage() {
-  const BLANK_POSITION_STATE = { state: "blank" };
+  const BLANK_POSITION_STATE: PositionState = { status: GeocodeStatus.Blank };
 
   const BLANK_FORM_STATE = { pickUp: "", dropOff: "" };
 
-  const [pickUpPositionsState, setPickUpPositionsState] = useState({
-    ...BLANK_POSITION_STATE,
-  });
+  const [pickUpPositionsState, setPickUpPositionsState] =
+    useState<PositionState>({
+      ...BLANK_POSITION_STATE,
+    });
 
-  const [dropOffPositionsState, setDropOffPositionsState] = useState({
-    ...BLANK_POSITION_STATE,
-  });
+  const [dropOffPositionsState, setDropOffPositionsState] =
+    useState<PositionState>({
+      ...BLANK_POSITION_STATE,
+    });
 
   const positionsState = {
     pickUp: pickUpPositionsState,
     dropOff: dropOffPositionsState,
   };
 
-  const setPositionsState = {
+  const setPositionsState: { [key: string]: Function } = {
     pickUp: setPickUpPositionsState,
     dropOff: setDropOffPositionsState,
   };
@@ -51,12 +56,12 @@ function CreateJobPage() {
       geocodeAddressRequest(target.value).then((result) => {
         if (result.errors) {
           setPositionsState[id]({
-            state: "error",
+            status: GeocodeStatus.Error,
           });
         } else {
           const geocode = result.data.geocode;
           setPositionsState[id]({
-            state: "present",
+            status: GeocodeStatus.Present,
             geocode: {
               lat: geocode.latitude,
               lng: geocode.longitude,
@@ -66,7 +71,7 @@ function CreateJobPage() {
       });
     } else {
       setPositionsState[id]({
-        state: "blank",
+        status: GeocodeStatus.Blank,
       });
     }
   };

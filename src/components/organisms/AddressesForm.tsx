@@ -2,6 +2,9 @@ import React from "react";
 
 import { styled } from "@mui/system";
 
+import { PositionState } from "../../interfaces/PositionState";
+import { GeocodeStatus } from "../../enums/GeocodeStatus";
+
 import Button from "../atoms/Button";
 import IconTextInput from "../molecules/IconTextInput";
 
@@ -22,10 +25,15 @@ interface Props {
   styles: object;
   formState: object;
   createJobState: string | null;
-  positionsState: object;
+  positionsState: { [key: string]: PositionState };
   setPosition: Function;
   geocodeAddress: Function;
   createJob: Function;
+}
+
+interface IconsPaths {
+  pickUp: { [key: string]: string };
+  dropOff: { [key: string]: string };
 }
 
 function AddressesForm({
@@ -37,7 +45,7 @@ function AddressesForm({
   geocodeAddress,
   createJob,
 }: Props) {
-  const ICONS_PATHS = {
+  const ICONS_PATHS: IconsPaths = {
     pickUp: {
       blank: "src/assets/pickUpBadgeBlank.svg",
       present: "src/assets/pickUpBadgePresent.svg",
@@ -54,7 +62,7 @@ function AddressesForm({
     <FormBox styles={styles}>
       <IconTextInput
         id="pickUp"
-        iconPath={ICONS_PATHS.pickUp[positionsState.pickUp.state]}
+        iconPath={ICONS_PATHS.pickUp[positionsState.pickUp.status]}
         alt="Pick Up badge with grey background"
         placeholder={"Pick up address"}
         styles={{ marginBottom: "16px" }}
@@ -66,7 +74,7 @@ function AddressesForm({
       />
       <IconTextInput
         id="dropOff"
-        iconPath={ICONS_PATHS.dropOff[positionsState.dropOff.state]}
+        iconPath={ICONS_PATHS.dropOff[positionsState.dropOff.status]}
         alt="Drop off badge with grey background"
         placeholder={"Drop off address"}
         styles={{ marginBottom: "16px" }}
@@ -81,8 +89,8 @@ function AddressesForm({
         styles={{ width: "360px", alignSelf: "flex-end" }}
         disabled={
           createJobState === "inProcess" ||
-          positionsState.pickUp.state !== "present" ||
-          positionsState.dropOff.state !== "present"
+          positionsState.pickUp.status !== GeocodeStatus.Present ||
+          positionsState.dropOff.status !== GeocodeStatus.Present
         }
         onClick={() => {
           createJob();
