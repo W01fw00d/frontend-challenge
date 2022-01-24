@@ -58,12 +58,13 @@ function CreateJobPage() {
 
     if (value) {
       geocodeAddressRequest(target.value).then((result) => {
-        if (result.errors) {
+        const geocode = result.data.geocode;
+
+        if (result.errors || !geocode) {
           setPositionsState[id]({
             status: GeocodeStatus.Error,
           });
         } else {
-          const geocode = result.data.geocode;
           setPositionsState[id]({
             status: GeocodeStatus.Present,
             geocode: {

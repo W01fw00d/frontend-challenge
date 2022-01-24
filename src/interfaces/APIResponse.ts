@@ -1,18 +1,49 @@
+interface ErrorLocation {
+  line: number;
+  column: number;
+}
+
+interface ErrorExtension {
+  code: string;
+}
+
+interface Error {
+  message: string;
+  locations: ErrorLocation[];
+  path: string[];
+  extensions: ErrorExtension;
+}
+
 export interface Geocode {
   latitude: number;
   longitude: number;
 }
 
-interface Data {
-  geocode: Geocode;
+interface GeocodeData {
+  geocode: Geocode | null;
 }
 
 export interface GeocodeAPIResponse {
-  data?: Data;
-  errors?: any;
+  data: GeocodeData;
+  errors?: Error[];
+}
+
+interface Job {
+  address: string;
+  latitude: number;
+  longitude: number;
+}
+
+interface JobData {
+  pickup: Job;
+  dropoff: Job;
+}
+
+interface CreateJobData {
+  job: JobData | null;
 }
 
 export interface CreateJobAPIResponse {
-  data?: Data;
-  errors?: any;
+  data: CreateJobData;
+  errors?: Error[];
 }

@@ -16,6 +16,10 @@ interface Props {
   geocodeAddress: Function;
 }
 
+const IconImg = styled("img")({
+  margin: "0 8px 0 0",
+});
+
 function IconTextInput({
   iconPath,
   alt,
@@ -26,10 +30,6 @@ function IconTextInput({
   onChange,
   geocodeAddress,
 }: Props) {
-  const IconImg = styled("img")({
-    margin: "0 8px 0 0",
-  });
-
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end", ...styles }}>
       <IconImg src={iconPath} alt={alt} />

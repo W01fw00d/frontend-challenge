@@ -30,7 +30,24 @@ export async function geocodeAddressRequest(
     ? {
         data: { geocode: { ...position } },
       }
-    : { errors: true };
+    : {
+        data: { geocode: null },
+        errors: [
+          {
+            message: `"${address}" cannot be geocoded.`,
+            locations: [
+              {
+                line: 1,
+                column: 1,
+              },
+            ],
+            path: ["geocode"],
+            extensions: {
+              code: "GEOCODE_ERROR",
+            },
+          },
+        ],
+      };
 
   return await result;
 }
@@ -40,7 +57,41 @@ export async function createJobRequest(
   dropOff: string
 ): Promise<CreateJobAPIResponse> {
   const result =
-    POSITIONS[pickUp] && POSITIONS[dropOff] ? {} : { errors: true };
+    POSITIONS[pickUp] && POSITIONS[dropOff]
+      ? {
+          data: {
+            job: {
+              pickup: {
+                ...POSITIONS[pickUp],
+                address: pickUp,
+              },
+              dropoff: {
+                ...POSITIONS[dropOff],
+                address: dropOff,
+              },
+            },
+          },
+        }
+      : {
+          data: {
+            job: null,
+          },
+          errors: [
+            {
+              message: '"pickup" and "dropoff" are required',
+              locations: [
+                {
+                  line: 1,
+                  column: 1,
+                },
+              ],
+              path: ["job"],
+              extensions: {
+                code: "JOB_ERROR",
+              },
+            },
+          ],
+        };
 
   return await result;
 }
