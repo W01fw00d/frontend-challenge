@@ -2,6 +2,9 @@ import React from "react";
 
 import { styled } from "@mui/system";
 
+import { FormState } from "../../interfaces/FormState";
+import { PositionState } from "../../interfaces/PositionState";
+
 import AddressesForm from "../organisms/AddressesForm";
 import Toaster from "../atoms/Toaster";
 import Map from "../organisms/Map";
@@ -15,8 +18,8 @@ const Background = styled("div")({
 });
 
 interface Props {
-  formState: object;
-  positionsState: object;
+  formState: FormState;
+  positionsState: { [key: string]: PositionState };
   createJobState: string | null;
   setPosition: Function;
   geocodeAddress: Function;

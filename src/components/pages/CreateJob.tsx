@@ -3,34 +3,43 @@ import React, { useState } from "react";
 import { geocodeAddressRequest, createJobRequest } from "../../api/main";
 // import { geocodeAddressRequest, createJobRequest } from "../../api/mainMocked";
 
+import { GeocodeStatus } from "../../enums/GeocodeStatus";
+import { JobStatus } from "../../enums/JobStatus";
+import { PositionState } from "../../interfaces/PositionState";
+import { FormState } from "../../interfaces/FormState";
+
 import CreateJobTemplate from "../templates/CreateJob";
 
 function CreateJobPage() {
-  const BLANK_POSITION_STATE = { state: "blank" };
+  const BLANK_POSITION_STATE: PositionState = { status: GeocodeStatus.Blank };
 
-  const BLANK_FORM_STATE = { pickUp: "", dropOff: "" };
+  const [pickUpPositionsState, setPickUpPositionsState] =
+    useState<PositionState>({
+      ...BLANK_POSITION_STATE,
+    });
 
-  const [pickUpPositionsState, setPickUpPositionsState] = useState({
-    ...BLANK_POSITION_STATE,
-  });
-
-  const [dropOffPositionsState, setDropOffPositionsState] = useState({
-    ...BLANK_POSITION_STATE,
-  });
+  const [dropOffPositionsState, setDropOffPositionsState] =
+    useState<PositionState>({
+      ...BLANK_POSITION_STATE,
+    });
 
   const positionsState = {
     pickUp: pickUpPositionsState,
     dropOff: dropOffPositionsState,
   };
 
-  const setPositionsState = {
+  const setPositionsState: { [key: string]: Function } = {
     pickUp: setPickUpPositionsState,
     dropOff: setDropOffPositionsState,
   };
 
-  const [formState, setFormState] = useState({ ...BLANK_FORM_STATE });
+  const BLANK_FORM_STATE: FormState = { pickUp: "", dropOff: "" };
 
-  const [createJobState, setCreateJobState] = useState<string | null>(null);
+  const [formState, setFormState] = useState<FormState>({
+    ...BLANK_FORM_STATE,
+  });
+
+  const [createJobState, setCreateJobState] = useState<JobStatus | null>(null);
 
   const resetJobState = () => {
     setCreateJobState(null);
@@ -49,14 +58,15 @@ function CreateJobPage() {
 
     if (value) {
       geocodeAddressRequest(target.value).then((result) => {
-        if (result.errors) {
+        const geocode = result.data.geocode;
+
+        if (result.errors || !geocode) {
           setPositionsState[id]({
-            state: "error",
+            status: GeocodeStatus.Error,
           });
         } else {
-          const geocode = result.data.geocode;
           setPositionsState[id]({
-            state: "present",
+            status: GeocodeStatus.Present,
             geocode: {
               lat: geocode.latitude,
               lng: geocode.longitude,
@@ -66,18 +76,18 @@ function CreateJobPage() {
       });
     } else {
       setPositionsState[id]({
-        state: "blank",
+        status: GeocodeStatus.Blank,
       });
     }
   };
 
   const createJob = () => {
-    setCreateJobState("inProcess");
+    setCreateJobState(JobStatus.InProcess);
     createJobRequest(formState.pickUp, formState.dropOff).then((result) => {
       if (result.errors) {
         setCreateJobState(null);
       } else {
-        setCreateJobState("successful");
+        setCreateJobState(JobStatus.Succesful);
         setPickUpPositionsState({
           ...BLANK_POSITION_STATE,
         });

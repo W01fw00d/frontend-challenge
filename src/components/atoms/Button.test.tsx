@@ -5,16 +5,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-import App from "./Button";
+import Button from "./Button";
 
-describe("App", () => {
-  test("renders App component", () => {
-    render(<App />);
+describe("Button", () => {
+  test("Displays Button label", () => {
+    render(
+      <Button label="This is a button" disabled={false} onClick={() => {}} />
+    );
 
-    // screen.debug();
-
-    expect(
-      screen.getByText("Hello World - Frontend Challenge!")
-    ).toBeInTheDocument();
+    expect(screen.getByText("This is a button")).toBeInTheDocument();
   });
 });

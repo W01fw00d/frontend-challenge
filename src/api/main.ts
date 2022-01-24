@@ -1,40 +1,39 @@
-export async function geocodeAddressRequest(address: string) {
-  const graphqlApiUrl = "https://stuart-frontend-challenge.vercel.app/graphql";
+import {
+  GeocodeAPIResponse,
+  CreateJobAPIResponse,
+} from "../interfaces/APIResponse";
 
-  const headers = {
-    "content-type": "application/json",
-  };
+async function graphqlRequest(query: string) {
+  return await fetch("https://stuart-frontend-challenge.vercel.app/graphql", {
+    method: "POST",
+    body: JSON.stringify({ query }),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+}
 
-  const body = {
-    query: `query {
+export async function geocodeAddressRequest(
+  address: string
+): Promise<GeocodeAPIResponse> {
+  const response = await graphqlRequest(
+    `query {
         geocode(address: "${address}") {
           latitude,
           longitude
         }
-      }`,
-    variables: {
-      type: "post",
-    },
-  };
-
-  const response = await fetch(graphqlApiUrl, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: headers,
-  });
+      }`
+  );
 
   return await response.json();
 }
 
-export async function createJobRequest(pickUp: string, dropOff: string) {
-  const graphqlApiUrl = "https://stuart-frontend-challenge.vercel.app/graphql";
-
-  const headers = {
-    "content-type": "application/json",
-  };
-
-  const body = {
-    query: `mutation {
+export async function createJobRequest(
+  pickUp: string,
+  dropOff: string
+): Promise<CreateJobAPIResponse> {
+  const response = await graphqlRequest(
+    `mutation {
       job(
         pickup: "${pickUp}",
         dropoff: "${dropOff}"
@@ -50,17 +49,8 @@ export async function createJobRequest(pickUp: string, dropOff: string) {
           longitude,
         }
       }
-    }`,
-    variables: {
-      type: "post",
-    },
-  };
-
-  const response = await fetch(graphqlApiUrl, {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: headers,
-  });
+    }`
+  );
 
   return await response.json();
 }
