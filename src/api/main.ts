@@ -5,6 +5,7 @@ import {
 
 async function graphqlRequest(query: string) {
   return await fetch("https://stuart-frontend-challenge.vercel.app/graphql", {
+    // TODO: this url should be a secret
     method: "POST",
     body: JSON.stringify({ query }),
     headers: {
