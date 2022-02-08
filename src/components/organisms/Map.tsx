@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { PositionState } from "../../interfaces/PositionState";
 
@@ -12,6 +12,14 @@ function Map({ positionsState }: Props) {
     pickUp: null,
     dropOff: null,
   });
+
+  const [mapError, setMapError] = useState(false);
+
+  window.gm_authFailure = () => {
+    // This is executed when Google Maps API throws a Authentication error
+    // We presume here that the error is caused by missing a valid "key" param
+    setMapError(true);
+  };
 
   useEffect(() => {
     const CENTER_POSITION = {
@@ -60,7 +68,23 @@ function Map({ positionsState }: Props) {
     updateMarker("dropOff");
   }, [positionsState]);
 
-  return (
+  return mapError ? (
+    // TODO: create a styled component for this, and move to a different file
+    <span
+      style={{
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexFlow: "column",
+        backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
+      }}
+    >
+      <h1> Cannot display Google Maps </h1>
+      {/* TODO: this is the error message for dev environment; define for prod env too and apply env logic */}
+      <h3> Did you set your API_KEY? Check README for more details</h3>
+    </span>
+  ) : (
     <div
       style={{
         width: "100%",
