@@ -75,6 +75,10 @@ function CreateJobPage() {
           },
         });
       }
+    } else {
+      setPositionsState[id]({
+        ...BLANK_POSITION_STATE,
+      });
     }
   };
 
