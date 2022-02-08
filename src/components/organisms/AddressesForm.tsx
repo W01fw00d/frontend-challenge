@@ -9,7 +9,7 @@ import { GeocodeStatus } from "../../enums/GeocodeStatus";
 import Button from "../atoms/Button";
 import IconTextInput from "../molecules/IconTextInput";
 
-const FormBox = styled("div")(({ styles }: any) => ({
+const FormBox = styled("div")(({ style }: any) => ({
   display: "flex",
   flexDirection: "column",
 
@@ -19,7 +19,7 @@ const FormBox = styled("div")(({ styles }: any) => ({
   margin: "32px",
   backgroundColor: "white",
   boxShadow: "0 1px 2px 0 rgba(0,0,0,0.10), 0 1px 8px 0 rgba(0,0,0,0.10)",
-  ...styles,
+  ...style,
 }));
 
 interface Props {
@@ -60,7 +60,7 @@ function AddressesForm({
   };
 
   return (
-    <FormBox styles={styles}>
+    <FormBox style={styles}>
       <IconTextInput
         id="pickUp"
         iconPath={ICONS_PATHS.pickUp[positionsState.pickUp.status]}
