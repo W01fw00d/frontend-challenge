@@ -6,11 +6,13 @@
 
 - You need a Google Maps JS API Key.
 
-Insert the `API_KEY` in the [index.html](https://github.com/W01fw00d/frontend-challenge/blob/main/index.html).
+Set the `url` and `key` in `src/secrets/googleMapsAPI.json`
 
 Please be aware that if the `API_KEY` doesn't belong to an account with Billing enabled, a pop-up will appear on page load and a "For development purposes only" watermark will be displayed on the map.
 
 If you don't add an `API_KEY`, only the Google Maps features will be disabled.
+
+- Set the `url` in `src/secrets/graphqlAPI.json`
 
 - Commands
 
