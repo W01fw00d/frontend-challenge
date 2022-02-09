@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { MapScriptStatus } from "../../enums/MapScriptStatus";
 import { PositionState } from "../../interfaces/PositionState";
+import googleMapsAPI from "../../secrets/googleMapsAPI.json";
 
 interface Props {
   positionsState: { [key: string]: PositionState };
@@ -31,9 +32,7 @@ function Map({ positionsState }: Props) {
   useEffect(() => {
     const createGoogleMapsScript = () => {
       const script = document.createElement("script");
-
-      script.src =
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyB49xy9kDMTokkMp-_8ml8B4zbQhwyxhPU&callback=mapScriptCallback";
+      script.src = `${googleMapsAPI.url}?key=${googleMapsAPI.key}&callback=mapScriptCallback`;
       script.defer = true;
 
       document.head.appendChild(script);
