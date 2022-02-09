@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import { MapScriptStatus } from "../../enums/MapScriptStatus";
 import { PositionState } from "../../interfaces/PositionState";
 
 interface Props {
@@ -13,13 +14,33 @@ function Map({ positionsState }: Props) {
     dropOff: null,
   });
 
-  const [mapError, setMapError] = useState(false);
+  const [mapScriptStatus, setMapScriptStatus] = useState(
+    MapScriptStatus.Unloaded
+  );
 
   window.gm_authFailure = () => {
     // This is executed when Google Maps API throws a Authentication error
     // We presume here that the error is caused by missing a valid "key" param
-    setMapError(true);
+    setMapScriptStatus(MapScriptStatus.Error);
   };
+
+  window.mapScriptCallback = () => {
+    setMapScriptStatus(MapScriptStatus.Loaded);
+  };
+
+  useEffect(() => {
+    const createGoogleMapsScript = () => {
+      const script = document.createElement("script");
+
+      script.src =
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyB49xy9kDMTokkMp-_8ml8B4zbQhwyxhPU&callback=mapScriptCallback";
+      script.defer = true;
+
+      document.head.appendChild(script);
+    };
+
+    createGoogleMapsScript();
+  }, []);
 
   useEffect(() => {
     const CENTER_POSITION = {
@@ -28,15 +49,17 @@ function Map({ positionsState }: Props) {
       lng: 2.32079,
     };
 
-    mapElement.current = new window.google.maps.Map(
-      document.getElementById("map"),
-      {
-        center: { lat: CENTER_POSITION.lat, lng: CENTER_POSITION.lng },
-        zoom: 15,
-        disableDefaultUI: true,
-      }
-    );
-  }, []);
+    if (mapScriptStatus === MapScriptStatus.Loaded) {
+      mapElement.current = new window.google.maps.Map(
+        document.getElementById("map"),
+        {
+          center: { lat: CENTER_POSITION.lat, lng: CENTER_POSITION.lng },
+          zoom: 15,
+          disableDefaultUI: true,
+        }
+      );
+    }
+  }, [mapScriptStatus]);
 
   useEffect(() => {
     const removeMarker = (marker: any) => marker.setMap(null);
@@ -64,11 +87,13 @@ function Map({ positionsState }: Props) {
       }
     };
 
-    updateMarker("pickUp");
-    updateMarker("dropOff");
+    if (mapScriptStatus === MapScriptStatus.Loaded) {
+      updateMarker("pickUp");
+      updateMarker("dropOff");
+    }
   }, [positionsState]);
 
-  return mapError ? (
+  return mapScriptStatus === MapScriptStatus.Error ? (
     // TODO: create a styled component for this, and move to a different file
     <span
       style={{
