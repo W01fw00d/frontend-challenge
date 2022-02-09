@@ -3,9 +3,10 @@ import {
   CreateJobAPIResponse,
 } from "../interfaces/APIResponse";
 
+import graphqpAPI from "../secrets/graphqlAPI.json";
+
 async function graphqlRequest(query: string) {
-  return await fetch("https://stuart-frontend-challenge.vercel.app/graphql", {
-    // TODO: this url should be a secret
+  return await fetch(graphqpAPI.url, {
     method: "POST",
     body: JSON.stringify({ query }),
     headers: {
