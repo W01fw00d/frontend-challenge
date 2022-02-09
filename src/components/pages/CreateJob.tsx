@@ -46,58 +46,59 @@ function CreateJobPage() {
   };
 
   const setForm = (id: string, value: string) => {
-    setFormState({
-      ...formState,
+    setFormState((previousState) => ({
+      ...previousState,
       [id]: value,
-    });
+    }));
   };
 
-  const geocodeAddress = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const geocodeAddress = async ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     const id = target.id;
     const value = target.value;
 
     if (value) {
-      geocodeAddressRequest(target.value).then((result) => {
-        const geocode = result.data.geocode;
+      const result = await geocodeAddressRequest(target.value);
+      const geocode = result.data.geocode;
 
-        if (result.errors || !geocode) {
-          setPositionsState[id]({
-            status: GeocodeStatus.Error,
-          });
-        } else {
-          setPositionsState[id]({
-            status: GeocodeStatus.Present,
-            geocode: {
-              lat: geocode.latitude,
-              lng: geocode.longitude,
-            },
-          });
-        }
-      });
+      if (result.errors || !geocode) {
+        setPositionsState[id]({
+          status: GeocodeStatus.Error,
+        });
+      } else {
+        setPositionsState[id]({
+          status: GeocodeStatus.Present,
+          geocode: {
+            lat: geocode.latitude,
+            lng: geocode.longitude,
+          },
+        });
+      }
     } else {
       setPositionsState[id]({
-        status: GeocodeStatus.Blank,
+        ...BLANK_POSITION_STATE,
       });
     }
   };
 
-  const createJob = () => {
+  const createJob = async () => {
     setCreateJobState(JobStatus.InProcess);
-    createJobRequest(formState.pickUp, formState.dropOff).then((result) => {
-      if (result.errors) {
-        setCreateJobState(null);
-      } else {
-        setCreateJobState(JobStatus.Succesful);
-        setPickUpPositionsState({
-          ...BLANK_POSITION_STATE,
-        });
-        setDropOffPositionsState({
-          ...BLANK_POSITION_STATE,
-        });
+    const result = await createJobRequest(formState.pickUp, formState.dropOff);
 
-        setFormState({ ...BLANK_FORM_STATE });
-      }
-    });
+    if (result.errors) {
+      setCreateJobState(null);
+    } else {
+      setCreateJobState(JobStatus.Succesful);
+      setPickUpPositionsState({
+        ...BLANK_POSITION_STATE,
+      });
+      setDropOffPositionsState({
+        ...BLANK_POSITION_STATE,
+      });
+
+      setFormState({ ...BLANK_FORM_STATE });
+    }
   };
 
   return (

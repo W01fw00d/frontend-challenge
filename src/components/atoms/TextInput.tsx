@@ -14,8 +14,10 @@ function TextInput({
   placeholder,
   value,
   onChange,
-  geocodeAddress,
-}: Props) {
+  geocodeAddress, // TODO: this component is not really reusable. This name is not generic
+}: // And all the debounce feature should be independent, maybe I can create a higher component
+// that encapsulates this one or similar input components and gives them the debounce feature!
+Props) {
   const timeout = useRef<any>();
 
   const styles = {
