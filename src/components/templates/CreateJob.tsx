@@ -1,21 +1,12 @@
 import React from "react";
 
-import { styled } from "@mui/system";
-
 import { FormState } from "../../interfaces/FormState";
 import { PositionState } from "../../interfaces/PositionState";
 
 import Toaster from "../atoms/Toaster";
+import Background from "../atomsStyled/Background";
 import AddressesForm from "../organisms/AddressesForm";
 import Map from "../organisms/Map";
-
-const Background = styled("div")({
-  position: "fixed",
-  width: "100%",
-  height: "100%",
-  left: 0,
-  top: 0,
-});
 
 interface Props {
   formState: FormState;
