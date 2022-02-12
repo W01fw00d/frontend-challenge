@@ -2,8 +2,8 @@ import React from "react";
 import { styled } from "@mui/system";
 
 interface Props {
-  title: string;
-  subtitle: string;
+  title: React.ReactFragment;
+  subtitle: React.ReactFragment;
 }
 
 const Background = styled("span")(() => ({
@@ -18,8 +18,8 @@ const Background = styled("span")(() => ({
 function FullScreenError({ title, subtitle }: Props) {
   return (
     <Background>
-      <h1> {title} </h1>
-      <h3> {subtitle}</h3>
+      <h1>{title}</h1>
+      <h3>{subtitle}</h3>
     </Background>
   );
 }

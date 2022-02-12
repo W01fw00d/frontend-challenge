@@ -3,7 +3,8 @@ import {
   CreateJobAPIResponse,
 } from "../interfaces/APIResponse";
 
-import graphqpAPI from "../secrets/graphqlAPI.json";
+// import graphqpAPI from "../secrets/graphqlAPI.json";
+import graphqpAPI from "../secrets/graphqlAPIExample.json";
 
 async function graphqlRequest(query: string) {
   return await fetch(graphqpAPI.url, {

@@ -5,7 +5,9 @@ import FullScreenError from "../molecules/FullScreenError";
 import { MapScriptStatus } from "../../enums/MapScriptStatus";
 import { PositionState } from "../../interfaces/PositionState";
 
-import googleMapsAPI from "../../secrets/googleMapsAPI.json";
+import github from "../../secrets/github.json";
+// import googleMapsAPI from "../../secrets/googleMapsAPI.json";
+import googleMapsAPI from "../../secrets/googleMapsAPIExample.json";
 
 interface Props {
   positionsState: { [key: string]: PositionState };
@@ -95,11 +97,27 @@ function Map({ positionsState }: Props) {
     }
   }, [positionsState]);
 
-  /* TODO: this is the error message for dev environment; define for prod env too and apply env logic */
+  const isProd = false; /* TODO: apply environment logic to define this var */
+  const prodSubtitle = (
+    <>
+      <span>Ups. Apologies. Please </span>
+      <a href={github.repositoryIssues} target="_blank">
+        inform the Web Page Maintainer
+      </a>
+    </>
+  );
+  const devSubtitle = (
+    <>
+      <span>Did you set your "googleMapsAPI.json.key"?</span>
+      <br />
+      <span>Check the "README.md" for more details</span>
+    </>
+  );
+
   return mapScriptStatus === MapScriptStatus.Error ? (
     <FullScreenError
-      title="Cannot display Google Maps"
-      subtitle="Did you set your API_KEY? Check README for more details"
+      title="Cannot display 'Google Maps'"
+      subtitle={isProd ? prodSubtitle : devSubtitle}
     />
   ) : (
     <div
