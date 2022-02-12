@@ -1,26 +1,12 @@
 import React from "react";
 
-import { styled } from "@mui/system";
-
 import { FormState } from "../../interfaces/FormState";
 import { PositionState } from "../../interfaces/PositionState";
 import { GeocodeStatus } from "../../enums/GeocodeStatus";
 
 import Button from "../atoms/Button";
+import FormBox from "../atomsStyled/FormBox";
 import IconTextInput from "../molecules/IconTextInput";
-
-const FormBox = styled("div")(({ style }: any) => ({
-  display: "flex",
-  flexDirection: "column",
-
-  width: "400px",
-  borderRadius: "8px",
-  padding: "16px",
-  margin: "32px",
-  backgroundColor: "white",
-  boxShadow: "0 1px 2px 0 rgba(0,0,0,0.10), 0 1px 8px 0 rgba(0,0,0,0.10)",
-  ...style,
-}));
 
 interface Props {
   styles: object;

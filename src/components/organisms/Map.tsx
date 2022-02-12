@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import FullScreenError from "../molecules/FullScreenError";
+
 import { MapScriptStatus } from "../../enums/MapScriptStatus";
 import { PositionState } from "../../interfaces/PositionState";
+
 import googleMapsAPI from "../../secrets/googleMapsAPI.json";
 
 interface Props {
@@ -92,22 +95,12 @@ function Map({ positionsState }: Props) {
     }
   }, [positionsState]);
 
+  /* TODO: this is the error message for dev environment; define for prod env too and apply env logic */
   return mapScriptStatus === MapScriptStatus.Error ? (
-    // TODO: create a styled component for this, and move to a different file
-    <span
-      style={{
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexFlow: "column",
-        backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
-      }}
-    >
-      <h1> Cannot display Google Maps </h1>
-      {/* TODO: this is the error message for dev environment; define for prod env too and apply env logic */}
-      <h3> Did you set your API_KEY? Check README for more details</h3>
-    </span>
+    <FullScreenError
+      title="Cannot display Google Maps"
+      subtitle="Did you set your API_KEY? Check README for more details"
+    />
   ) : (
     <div
       style={{

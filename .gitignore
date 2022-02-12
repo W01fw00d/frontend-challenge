@@ -5,4 +5,5 @@ coverage
 notes.txt
 manualTesting.txt
 
-src/secrets
+src/secrets/googleMapsAPI.json
+src/secrets/graphqlAPI.json
