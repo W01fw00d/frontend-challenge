@@ -9,35 +9,35 @@ interface Props {
 }
 
 function Button({ label, styles = {}, disabled = false, onClick }: Props) {
-  const defaultStyles: any = {
-    height: "40px",
-    boxShadow: "0 1px 2px 0 rgba(16,162,234,0.30)",
-    backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
-    fontWeight: 900,
-    fontSize: "16px",
-    color: "#FFFFFF",
-    textTransform: "none",
+  const getStyles = (): any => {
+    const boxShadow = "0 1px 2px 0 rgba(16,162,234,0.30)";
 
-    "&:disabled": {
+    return {
+      height: "40px",
+      boxShadow,
+      backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
+      fontWeight: 900,
+      fontSize: "16px",
       color: "#FFFFFF",
-      opacity: "0.5",
-    },
+      textTransform: "none",
 
-    "&.MuiButtonBase-root:hover": {
-      boxShadow: "0 1px 2px 0 rgba(16,162,234,0.30)",
-    },
+      "&:disabled": {
+        color: "#FFFFFF",
+        opacity: "0.5",
+      },
 
-    "&.MuiButton-root:hover": {
-      boxShadow: "0 1px 2px 0 rgba(16,162,234,0.30)",
-    },
+      "&.MuiButtonBase-root:hover, &.MuiButton-root:hover": {
+        boxShadow,
+      },
 
-    ...styles,
+      ...styles,
+    };
   };
 
   return (
     <MuiButton
       variant="contained"
-      sx={defaultStyles}
+      sx={getStyles()}
       disabled={disabled}
       onClick={onClick}
     >
