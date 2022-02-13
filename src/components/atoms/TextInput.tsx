@@ -35,13 +35,10 @@ Props) {
       color: "#8596A6",
     },
 
-    "&.MuiInputBase-root.MuiInput-root:before": {
-      borderBottom: "none",
-    },
-
-    "&.MuiInputBase-root.MuiInput-root:after": {
-      borderBottom: "none",
-    },
+    "&.MuiInputBase-root.MuiInput-root:before, &.MuiInputBase-root.MuiInput-root:after":
+      {
+        borderBottom: "none",
+      },
   };
 
   return (

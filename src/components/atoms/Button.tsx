@@ -1,5 +1,6 @@
 import React from "react";
 import { Button as MuiButton } from "@mui/material";
+import { useTheme } from "@mui/styles";
 
 interface Props {
   label: string;
@@ -10,19 +11,20 @@ interface Props {
 
 function Button({ label, styles = {}, disabled = false, onClick }: Props) {
   const getStyles = (): any => {
+    const { color, backgroundImage }: any = useTheme();
     const boxShadow = "0 1px 2px 0 rgba(16,162,234,0.30)";
 
     return {
       height: "40px",
       boxShadow,
-      backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
+      backgroundImage,
       fontWeight: 900,
       fontSize: "16px",
-      color: "#FFFFFF",
+      color,
       textTransform: "none",
 
       "&:disabled": {
-        color: "#FFFFFF",
+        color,
         opacity: "0.5",
       },
 
