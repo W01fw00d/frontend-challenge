@@ -22,6 +22,7 @@ Props) {
 
   const styles = {
     borderRadius: "4px",
+    // TODO: move margins pxs common sizes to a common file, 32px, 16px and 8px...
     height: "32px",
     background: "#F0F3F7",
 

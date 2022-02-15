@@ -32,21 +32,23 @@ function AddressesForm({
   geocodeAddress,
   createJob,
 }: Props) {
+  const ICONS_PATH_TEMPLATE = (file: string) => `src/assets/${file}.svg`;
   const ICONS_PATHS: IconsPaths = {
     pickUp: {
-      blank: "src/assets/pickUpBadgeBlank.svg",
-      present: "src/assets/pickUpBadgePresent.svg",
-      error: "src/assets/pickUpBadgeError.svg",
+      blank: ICONS_PATH_TEMPLATE("pickUpBadgeBlank"),
+      present: ICONS_PATH_TEMPLATE("pickUpBadgePresent"),
+      error: ICONS_PATH_TEMPLATE("pickUpBadgeError"),
     },
     dropOff: {
-      blank: "src/assets/dropOffBadgeBlank.svg",
-      present: "src/assets/dropOffBadgePresent.svg",
-      error: "src/assets/dropOffBadgeError.svg",
+      blank: ICONS_PATH_TEMPLATE("dropOffBadgeBlank"),
+      present: ICONS_PATH_TEMPLATE("dropOffBadgePresent"),
+      error: ICONS_PATH_TEMPLATE("dropOffBadgeError"),
     },
   };
 
   return (
     <FormBox style={styles}>
+      {/* TODO: create a DRY function to render these inputs */}
       <IconTextInput
         id="pickUp"
         iconPath={ICONS_PATHS.pickUp[positionsState.pickUp.status]}

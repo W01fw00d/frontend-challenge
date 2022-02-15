@@ -1,5 +1,6 @@
 import React from "react";
 import Snackbar from "@mui/material/Snackbar";
+import { useTheme } from "@mui/styles";
 
 interface Props {
   isOpen: boolean;
@@ -8,6 +9,8 @@ interface Props {
 }
 
 function Toaster({ isOpen, message, close }: Props) {
+  const { color, boxShadowColor }: any = useTheme();
+
   const defaultStyles = {
     "&.MuiSnackbar-root": {
       top: "32px",
@@ -16,9 +19,9 @@ function Toaster({ isOpen, message, close }: Props) {
     "& .MuiPaper-root": {
       borderRadius: "8px",
       backgroundColor: "rgba(51,51,51,0.90)",
-      boxShadow: "0 1px 2px 0 rgba(0,0,0,0.10), 0 1px 8px 0 rgba(0,0,0,0.10)",
+      boxShadow: `0 1px 2px 0 ${boxShadowColor}, 0 1px 8px 0 ${boxShadowColor}`,
       fontSize: "16px",
-      color: "#FFFFFF",
+      color,
     },
   };
 
