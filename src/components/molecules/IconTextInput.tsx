@@ -1,9 +1,8 @@
 import React from "react";
-
 import Box from "@mui/material/Box";
-import { styled } from "@mui/system";
 
 import TextInput from "../atoms/TextInput";
+import IconImage from "../atomsStyled/IconImage";
 
 interface Props {
   iconPath: string;
@@ -15,10 +14,6 @@ interface Props {
   onChange: Function;
   geocodeAddress: Function;
 }
-
-const IconImg = styled("img")({
-  margin: "0 8px 0 0",
-});
 
 function IconTextInput({
   iconPath,
@@ -32,7 +27,7 @@ function IconTextInput({
 }: Props) {
   return (
     <Box sx={{ display: "flex", alignItems: "flex-end", ...styles }}>
-      <IconImg src={iconPath} alt={alt} />
+      <IconImage src={iconPath} alt={alt} />
       <TextInput
         id={id}
         placeholder={placeholder}

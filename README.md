@@ -6,13 +6,13 @@
 
 - You need a Google Maps JS API Key.
 
-Set the `url` and `key` in `src/secrets/googleMapsAPI.json`
+Set the `url` and `key` in `src/secrets/googleMapsAPI.json` (check the `googleMapsAPIExample.json`)
 
-Please be aware that if the `API_KEY` doesn't belong to an account with Billing enabled, a pop-up will appear on page load and a "For development purposes only" watermark will be displayed on the map.
+Please be aware that if the `key` doesn't belong to an account with Billing enabled, a pop-up will appear on page load and a "For development purposes only" watermark will be displayed on the map.
 
-If you don't add an `API_KEY`, only the Google Maps features will be disabled.
+If you don't add an `key`, only the Google Maps features will be disabled.
 
-- Set the `url` in `src/secrets/graphqlAPI.json`
+- Set the `url` in `src/secrets/graphqlAPI.json` (check the `graphqlAPIExample.json`)
 
 - Commands
 

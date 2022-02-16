@@ -1,4 +1,4 @@
-export interface FormState {
+export type FormState = {
   pickUp: string;
   dropOff: string;
-}
+};

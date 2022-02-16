@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ThemeProvider } from "@mui/material/styles";
 
 import { geocodeAddressRequest, createJobRequest } from "../../api/main";
 // import { geocodeAddressRequest, createJobRequest } from "../../api/mainMocked";
@@ -7,6 +8,7 @@ import { GeocodeStatus } from "../../enums/GeocodeStatus";
 import { JobStatus } from "../../enums/JobStatus";
 import { PositionState } from "../../interfaces/PositionState";
 import { FormState } from "../../interfaces/FormState";
+import theme from "../themes/original";
 
 import CreateJobTemplate from "../templates/CreateJob";
 
@@ -102,15 +104,18 @@ function CreateJobPage() {
   };
 
   return (
-    <CreateJobTemplate
-      formState={formState}
-      positionsState={positionsState}
-      createJobState={createJobState}
-      setPosition={setForm}
-      geocodeAddress={geocodeAddress}
-      createJob={createJob}
-      resetJobState={resetJobState}
-    />
+    <ThemeProvider theme={theme}>
+      {/* TODO: Try to add an alternative theme, maybe dark mode? */}
+      <CreateJobTemplate
+        formState={formState}
+        positionsState={positionsState}
+        createJobState={createJobState}
+        setPosition={setForm}
+        geocodeAddress={geocodeAddress}
+        createJob={createJob}
+        resetJobState={resetJobState}
+      />
+    </ThemeProvider>
   );
 }
 

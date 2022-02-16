@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import FullScreenError from "../molecules/FullScreenError";
+
 import { MapScriptStatus } from "../../enums/MapScriptStatus";
 import { PositionState } from "../../interfaces/PositionState";
-import googleMapsAPI from "../../secrets/googleMapsAPI.json";
+
+import github from "../../secrets/github.json";
+// import googleMapsAPI from "../../secrets/googleMapsAPI.json";
+import googleMapsAPI from "../../secrets/googleMapsAPIExample.json";
 
 interface Props {
   positionsState: { [key: string]: PositionState };
@@ -92,22 +97,28 @@ function Map({ positionsState }: Props) {
     }
   }, [positionsState]);
 
+  const isProd = false; /* TODO: apply environment logic to define this var */
+  const prodSubtitle = (
+    <>
+      <span>Ups. Apologies. Please </span>
+      <a href={github.repositoryIssues} target="_blank">
+        inform the Web Page Maintainer
+      </a>
+    </>
+  );
+  const devSubtitle = (
+    <>
+      <span>Did you set your "googleMapsAPI.json.key"?</span>
+      <br />
+      <span>Check the "README.md" for more details</span>
+    </>
+  );
+
   return mapScriptStatus === MapScriptStatus.Error ? (
-    // TODO: create a styled component for this, and move to a different file
-    <span
-      style={{
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexFlow: "column",
-        backgroundImage: "linear-gradient(#10A2EA, #0F99E8)",
-      }}
-    >
-      <h1> Cannot display Google Maps </h1>
-      {/* TODO: this is the error message for dev environment; define for prod env too and apply env logic */}
-      <h3> Did you set your API_KEY? Check README for more details</h3>
-    </span>
+    <FullScreenError
+      title="Cannot display 'Google Maps'"
+      subtitle={isProd ? prodSubtitle : devSubtitle}
+    />
   ) : (
     <div
       style={{
